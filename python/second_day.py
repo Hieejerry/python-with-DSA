@@ -32,24 +32,47 @@
 
 ##############################################################################################
 
-def first_accurance(nums, target):
+# def first_accurance(nums, target):
+#     low, high = 0 , len(nums) -1
+#     while low<=high:
+#         mid = (low + high )// 2
+#         if nums[mid] == target:
+#             return mid
+#         elif nums[mid] < target:
+#             low = mid + 1
+#         else:
+#             high = mid-1
+#     return low
+
+# nums = [5, 7, 7, 8, 8, 10]
+# target = 6
+# print(first_accurance(nums , target))
+
+
+
+##################################################################
+# Search element in roted sorted array using binary search 
+
+def searchInRotedSortedArr(nums, target):
     low, high = 0 , len(nums) -1
-    first = 0
-    while low<=high:
+    while low <= high:
         mid = (low + high )// 2
         if nums[mid] == target:
-            first = mid
-            return first
-        elif nums[mid] < target:
-            low = mid +1
-            if(nums[low+1] <= target):
-                return first+1
+            return mid
+        elif nums[low] <= nums[mid]:
+            if nums[low] <= target and target < nums[mid]:
+                high = mid - 1
+            else:
+                low = mid + 1
         else:
-            high = mid-1
-            if(nums[high-1] >= target):
-                return first+1
-    return first
+            if nums[mid] < target and target <= nums[high]:
+                low = mid +1
+            else:
+                high = mid -1
+            
+    return -1
+    
 
-nums = [5, 7, 7, 8, 8, 10]
-target = 60
-print(first_accurance(nums , target))
+nums = [5, 7, 8, 9, 10, 1 , 2]
+target = 8
+print(searchInRotedSortedArr(nums , target))
