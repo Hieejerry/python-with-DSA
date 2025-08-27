@@ -53,12 +53,44 @@
 ##################################################################
 # Search element in roted sorted array using binary search 
 
+# def searchInRotedSortedArr(nums, target):
+#     low, high = 0 , len(nums) -1
+#     while low <= high:
+#         mid = (low + high )// 2
+#         if nums[mid] == target:
+#             return mid
+#         elif nums[low] <= nums[mid]:
+#             if nums[low] <= target and target < nums[mid]:
+#                 high = mid - 1
+#             else:
+#                 low = mid + 1
+#         else:
+#             if nums[mid] < target and target <= nums[high]:
+#                 low = mid +1
+#             else:
+#                 high = mid -1
+            
+#     return -1
+    
+
+# nums = [5, 7, 8, 9, 10, 1 , 2]
+# target = 8
+# print(searchInRotedSortedArr(nums , target))
+
+
+
+##########################################################################
+# Search element in roted sorted array using binary search when repetrd element is available
+
 def searchInRotedSortedArr(nums, target):
     low, high = 0 , len(nums) -1
     while low <= high:
         mid = (low + high )// 2
         if nums[mid] == target:
             return mid
+        elif nums[low] == nums[mid] and nums[mid] == nums[high]:
+            low = low + 1
+            high = high -1
         elif nums[low] <= nums[mid]:
             if nums[low] <= target and target < nums[mid]:
                 high = mid - 1
@@ -73,6 +105,6 @@ def searchInRotedSortedArr(nums, target):
     return -1
     
 
-nums = [5, 7, 8, 9, 10, 1 , 2]
-target = 8
+nums = [3,3, 1,2,3,3,3,3,3]
+target = 2
 print(searchInRotedSortedArr(nums , target))
